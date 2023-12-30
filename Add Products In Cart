@@ -1,0 +1,38 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class AddToCartTest {
+    public static void main(String[] args) {
+        // Set the path to your ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "path_to_chromedriver.exe");
+
+        // Instantiate ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the website
+        driver.get("https://automationexercise.com/");
+
+        // Find the first product and add it to the cart
+        WebElement firstProductAddToCartButton = driver.findElement(By.xpath("//button[contains(text(), 'Add to Cart')]"));
+        firstProductAddToCartButton.click();
+
+        // Find the second product and add it to the cart
+        WebElement secondProductAddToCartButton = driver.findElement(By.xpath("//button[contains(text(), 'Add to Cart')]"));
+        secondProductAddToCartButton.click();
+
+        // Verify that the products are added to the cart
+        WebElement cartIcon = driver.findElement(By.xpath("//a[@href='/cart']"));
+        String cartItemCount = cartIcon.getText();
+
+        if (cartItemCount.equals("2")) {
+            System.out.println("Products are successfully added to the cart.");
+        } else {
+            System.out.println("Products are not added to the cart.");
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
